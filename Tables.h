@@ -25,7 +25,7 @@ unordered_map<string, int> secondPerson;
 unordered_map<string, int> fluff;
 unordered_map<char, int> punctuation;
 
-
+unordered_map<string, int> everythingElse;
 
 
 void initialize() {
@@ -109,6 +109,10 @@ void initialize() {
   fluff["little"] = 1;
   fluff["very"] = 1;
   fluff["quite"] = 1;
+  fluff["literally"] = 1;
+  fluff["legit"] = 1;
+  fluff["legitimately"] = 1;
+
 
   firstPerson["i"] = 1;
   firstPerson["i'd"] = 1;
@@ -180,7 +184,11 @@ void initialize() {
   sContractions["who's"] = 1;
   sContractions["why's"] = 1;
 
-
+  everythingElse["because"] = 1;
+  everythingElse["that"] = 1;
+  everythingElse["may"] = 1;
+  everythingElse["their"] = 1;
+  everythingElse["and"] = 1;
 
 }
 
