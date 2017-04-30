@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="font-awesome-4.6.3/css/font-awesome.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!--angularJS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+        <!--UI Bootstrap-->
+        <script src="ui-bootstrap-custom-tpls-2.1.4.min.js"></script>
+        
+        <script src="mainController.js"></script>     <!-- change back to go check folder for controllers -->
+
+        <title>Word Bot 3000</title>
+    </head>
+
+
+
+    <body ng-app="WritingChecker" ng-controller="mainController as vm">
+                
+        
+        <div class="page-header" style="text-align: center">
+           <h1 style = 'font-family: "Courier New", Courier, monospace'> Word Bot 3000 </h1> 
+             <img style ="position:absolute; left: 0px; top:0px" width ='100' height ='99' src ="https://media.giphy.com/media/3oKIPfwpHSSAVlCcs8/giphy.gif">
+            <img style ="position:absolute; right: 0px; top:0px" width ='100' height ='99' src ="https://media.giphy.com/media/3oKIPfwpHSSAVlCcs8/giphy.gif">
+              
+        </div>
+        
+        
+        <div  style="padding: 0px 5px 0px 5px; text-align: center" ng-if="vm.display">
+        
+                    <div class="panel panel-primary" style="font-size: 17px">
+               
+                        <div style="text-align: left; vertical-align: middle;" class="panel-heading">
+         <div class = "row">
+                <div class = "col-sm-11">
+                     {{vm.currentError.message}}
+                </div>
+                <div class = "col-sm-1">
+                            <button class = "btn btn-info" ng-click="vm.previousError()"> <i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                            <button class = "btn btn-info" ng-click="vm.nextError()"><i class="fa fa-arrow-right" aria-hidden="true"></i> </button>
+                            
+                        </div>
+                     </div>
+                    </div>  
+                        <div class="panel-body" style="max-height: 10; overflow-y: scroll; text-align: left;">
+                            <span ng-repeat="n in vm.data.words track by $index">
+                                <span ng-repeat="i in n track by $index">
+                                    <span ng-if="($parent.$index == vm.currentError.index[0] && $index == vm.currentError.index[1]) || i == vm.currentError.word" style="background-color: #FFFF00">{{i}}</span>
+                                    <span ng-if="!(($parent.$index == vm.currentError.index[0] && $index == vm.currentError.index[1]) || i == vm.currentError.word)">{{i}}</span>
+                                </span>
+                        </span>
+                       
+                </div>   
+            </div>
+        </div>
+
+        <div>
+        
+        </div>
+        <div style = "padding-left:5px">
+            <span ng-if="!vm.display">
+                Upload a file to begin edits.
+            </span>
+        
+            <span ng-if="vm.display">
+                Upload a new file for edits.
+        </span>
+        
+        
+        <form action="http://localhost:8080/WritingChecker/webresources/generic/submit" method="POST" enctype="multipart/form-data">
+        <label class="btn btn-default btn-file">
+    Browse <input type="file" style="display: none;">
+</label>
+            <!--<span class = "btn btn-file btn-warning" type = "file">Select File<input style = "display:none" name="file" id="upload" type="file"/></span>-->
+            <br>
+                <button class = "btn btn-primary" value="Upload" type="submit" ng-click="console.log('upload')">Upload</button>
+        </form>
+            </div>
+    </body>
+</html>
