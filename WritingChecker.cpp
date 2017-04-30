@@ -212,7 +212,7 @@ void WritingChecker :: analyze(){
   /*parse repetitions*/
   
   for (std::pair<string, int> it : frequencyTable) {
-    if(! (article.count(it.first) == 1) && !(preposition.count(it.first) == 1) && it.second > 1  ) {  
+    if(! (article.count(it.first) == 1) && !(preposition.count(it.first) == 1) && it.second > 1 && !(everythingElse.count(it.first) == 1)  ) {  
       errorCatalogue.push_back("{\"index\": [-1, -1], \"message\": \"You frequently use this word.\", \"word\" : \"" + it.first  + "\"}");
       
     }
@@ -337,7 +337,7 @@ string WritingChecker:: writingStringify() {
   ret += "]";
   
 
-
+  errorCatalogue.pop_back();
 
   ret = "{\"words\": " + ret + ", \"errors\": [";
   for(int i = 0; i < errorCatalogue.size(); i++) {
